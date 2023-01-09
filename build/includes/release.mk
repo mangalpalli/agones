@@ -95,6 +95,7 @@ do-release: $(ensure-build-image)
 
 	@echo "Now go make the $(RELEASE_VERSION) release on Github!"
 
+build-release: $(MAKE) test-examples-on-gar
 ifdef RC_RELEASE
 build-release: RELEASE_VERSION=$(base_version)-rc
 else
