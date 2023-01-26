@@ -13,6 +13,19 @@
 # limitations under the License.
 
 steps:
+  - name: us-docker.pkg.dev/$PROJECT_ID/ci/make-docker
+    dir: ./build
+    entrypoint: bash
+    args:
+      - '-c'
+      - 'make test-examples-on-gar'
+    id: test-examples-on-gar
+  - name: gcr.io/cloud-builders/gsutil
+    entrypoint: bash
+    args:
+      - '-c'
+      - 'gsutil mb $_STORAGE || true'
+    id: create-bucket
   - name: gcr.io/cloud-builders/gsutil
     entrypoint: bash
     args:
